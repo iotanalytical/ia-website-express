@@ -8,7 +8,7 @@ const helmet = require('helmet');
 
 // Create Express app and also allow for app PORT to be optionally specified by an environment variable
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5050;
 
 // Require .env files for environment variables (keys and secrets)
 require('dotenv').config();
@@ -28,9 +28,11 @@ app.use(
 );
 
 
-const dataRoutes = require('./routes/data');
+const chartsRoutes = require('./routes/charts');
+const logsRoutes = require('./routes/logs');
 
-app.use('/api', dataRoutes);
+app.use('/charts', chartsRoutes);
+app.use('/logs', logsRoutes);
 
 
 app.listen(PORT, () => {
