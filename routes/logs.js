@@ -1,26 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const { MongoClient } = require("mongodb");
+const db = require("../database/db");
 
-require("dotenv").config();
-
-const MongodbUrl = process.env.ATLAS_URI;
-
-const dbName = "ia-website";
-
-// Data endpoint
 router.get("/", (req, res) => {
-  // connect to database and fetch data
-  const client = new MongoClient(MongodbUrl);
+  // fetch data from database
   async function run() {
     try {
-      await client.connect();
-      const db = client.db(dbName);
       const col = db.collection("logs");
+      const results = await col.find({}).toArray();
 
-      const document = await col.find({}).toArray();
-      res.status(200).send(document);
+      res.status(200).send(results);
     } catch (err) {
       console.log(err.stack);
     } finally {
