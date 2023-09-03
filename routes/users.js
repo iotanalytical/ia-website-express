@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
         { expiresIn: "15m" }
       );
 
-      res.status(200).json({ token: token });
+      res.status(200).json({ token: token, user: user.name });
     } catch (err) {
       res.status(400).send("Couldnt log you in");
     }
@@ -57,7 +57,6 @@ router.get("/current", (req, res) => {
   const authToken = authHeader.split(" ")[1];
 
   jwt.verify(authToken, process.env.SECRET, (err, decoded) => {
-
     if (err) {
       return res.status(401).send("Invalid auth token");
     }
