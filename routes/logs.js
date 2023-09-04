@@ -3,12 +3,12 @@ const router = express.Router();
 
 const db = require("../database/db");
 
-router.get("/", (req, res) => {
+router.get("/:user", (req, res) => {
   // fetch data from database
   async function run() {
     try {
       const col = db.collection("logs");
-      const results = await col.find({}).toArray();
+      const results = await col.find({user_name: req.params.user}).toArray();
 
       res.status(200).send(results);
     } catch (err) {
