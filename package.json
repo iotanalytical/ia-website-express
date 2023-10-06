@@ -16,6 +16,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.0.0"
   },
+  "engines": {
+    "node": ">=14 <18.17.1"
+  },
   "devDependencies": {
     "nodemon": "^3.0.1"
   }
